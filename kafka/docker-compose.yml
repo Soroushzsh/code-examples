@@ -1,0 +1,25 @@
+services:
+  consumer-app:
+    container_name: consumer-app
+    build:
+      context: .
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8091:8000"
+    volumes:
+      - "logs:/app/logs"
+    restart: unless-stopped
+    networks:
+      - kafka-network
+#   deploy:
+#   replicas: 20
+
+volumes:
+  logs:
+
+networks:
+  backend:
+    name: kafka-network
+    external: true
+
